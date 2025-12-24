@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transition 示例</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .example-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .example-title {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      color: #333;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    .example-desc {
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 0.9em;
+    }
+
+    .demo-area {
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    /* 示例1: 基础按钮 */
+    .btn-basic {
+      background: #667eea;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-basic:hover {
+      background: #5568d3;
+    }
+
+    /* 示例2: 缩放按钮 */
+    .btn-scale {
+      background: #f093fb;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-scale:hover {
+      transform: scale(1.15);
+    }
+
+    /* 示例3: 多属性按钮 */
+    .btn-multi {
+      background: #4facfe;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .btn-multi:hover {
+      background: #00f2fe;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    /* 示例4: 旋转卡片 */
+    .rotate-card {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+
+    .rotate-card:hover {
+      transform: rotate(360deg);
+    }
+
+    /* 示例5: 宽度变化 */
+    .width-box {
+      width: 100px;
+      height: 60px;
+      background: #43e97b;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: width 0.5s ease-out;
+    }
+
+    .width-box:hover {
+      width: 250px;
+    }
+
+    /* 示例6: 透明度 */
+    .opacity-box {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .opacity-box:hover {
+      opacity: 0.3;
+    }
+
+    /* 示例7: 边框圆角 */
+    .radius-box {
+      width: 120px;
+      height: 120px;
+      background: #ff6b6b;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-radius 0.5s ease;
+    }
+
+    .radius-box:hover {
+      border-radius: 50%;
+    }
+
+    /* 示例8: 阴影 */
+    .shadow-card {
+      width: 180px;
+      height: 100px;
+      background: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .shadow-card:hover {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    /* 示例9: 颜色渐变 */
+    .color-text {
+      font-size: 2em;
+      font-weight: bold;
+      color: #667eea;
+      cursor: pointer;
+      transition: color 0.4s ease;
+    }
+
+    .color-text:hover {
+      color: #ff6b6b;
+    }
+
+    /* 示例10: 组合动画 */
+    .combo-card {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+      transition: transform 0.5s ease, opacity 0.5s ease, border-radius 0.5s ease;
+    }
+
+    .combo-card:hover {
+      transform: scale(1.2) rotate(10deg);
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+
+    /* 示例11: 不同速度曲线对比 */
+    .timing-demo {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .timing-box {
+      width: 60px;
+      height: 40px;
+      background: #667eea;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .demo-area:hover .timing-linear {
+      transform: translateX(150px);
+      transition: transform 1s linear;
+    }
+
+    .demo-area:hover .timing-ease {
+      transform: translateX(150px);
+      transition: transform 1s ease;
+    }
+
+    .demo-area:hover .timing-ease-in {
+      transform: translateX(150px);
+      transition: transform 1s ease-in;
+    }
+
+    .demo-area:hover .timing-ease-out {
+      transform: translateX(150px);
+      transition: transform 1s ease-out;
+    }
+
+    /* 示例12: 延迟效果 */
+    .delay-demo {
+      display: flex;
+      gap: 10px;
+    }
+
+    .delay-box {
+      width: 50px;
+      height: 50px;
+      background: #ff6b6b;
+      border-radius: 6px;
+      transform: scale(1);
+    }
+
+    .demo-area:hover .delay-box:nth-child(1) {
+      transform: scale(1.3);
+      transition: transform 0.3s ease 0s;
+    }
+
+    .demo-area:hover .delay-box:nth-child(2) {
+      transform: scale(1.3);
+      transition: transform 0.3s ease 0.1s;
+    }
+
+    .demo-area:hover .delay-box:nth-child(3) {
+      transform: scale(1.3);
+      transition: transform 0.3s ease 0.2s;
+    }
+
+    .demo-area:hover .delay-box:nth-child(4) {
+      transform: scale(1.3);
+      transition: transform 0.3s ease 0.3s;
+    }
+
+    code {
+      display: block;
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.85em;
+      margin-top: 15px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 CSS Transition 交互示例</h1>
+
+    <div class="examples">
+      <!-- 示例1 -->
+      <div class="example-card">
+        <h3 class="example-title">1. 基础颜色过渡</h3>
+        <p class="example-desc">鼠标悬停查看背景色平滑变化</p>
+        <div class="demo-area">
+          <button class="btn-basic">悬停我</button>
+        </div>
+        <code>transition: background-color 0.3s ease;</code>
+      </div>
+
+      <!-- 示例2 -->
+      <div class="example-card">
+        <h3 class="example-title">2. 缩放变换</h3>
+        <p class="example-desc">按钮在悬停时放大</p>
+        <div class="demo-area">
+          <button class="btn-scale">缩放按钮</button>
+        </div>
+        <code>transition: transform 0.3s ease;</code>
+      </div>
+
+      <!-- 示例3 -->
+      <div class="example-card">
+        <h3 class="example-title">3. 多属性过渡</h3>
+        <p class="example-desc">同时改变颜色、位置和阴影</p>
+        <div class="demo-area">
+          <button class="btn-multi">多效果按钮</button>
+        </div>
+        <code>transition: all 0.3s ease;</code>
+      </div>
+
+      <!-- 示例4 -->
+      <div class="example-card">
+        <h3 class="example-title">4. 旋转动画</h3>
+        <p class="example-desc">卡片旋转 360 度</p>
+        <div class="demo-area">
+          <div class="rotate-card">旋转我</div>
+        </div>
+        <code>transition: transform 0.5s ease;</code>
+      </div>
+
+      <!-- 示例5 -->
+      <div class="example-card">
+        <h3 class="example-title">5. 宽度变化</h3>
+        <p class="example-desc">盒子宽度从 100px 到 250px</p>
+        <div class="demo-area">
+          <div class="width-box">展开</div>
+        </div>
+        <code>transition: width 0.5s ease-out;</code>
+      </div>
+
+      <!-- 示例6 -->
+      <div class="example-card">
+        <h3 class="example-title">6. 透明度渐变</h3>
+        <p class="example-desc">元素逐渐变透明</p>
+        <div class="demo-area">
+          <div class="opacity-box">透明度</div>
+        </div>
+        <code>transition: opacity 0.4s ease;</code>
+      </div>
+
+      <!-- 示例7 -->
+      <div class="example-card">
+        <h3 class="example-title">7. 边框圆角</h3>
+        <p class="example-desc">方形变圆形</p>
+        <div class="demo-area">
+          <div class="radius-box"></div>
+        </div>
+        <code>transition: border-radius 0.5s ease;</code>
+      </div>
+
+      <!-- 示例8 -->
+      <div class="example-card">
+        <h3 class="example-title">8. 阴影效果</h3>
+        <p class="example-desc">阴影从小到大</p>
+        <div class="demo-area">
+          <div class="shadow-card">阴影卡片</div>
+        </div>
+        <code>transition: box-shadow 0.3s ease;</code>
+      </div>
+
+      <!-- 示例9 -->
+      <div class="example-card">
+        <h3 class="example-title">9. 文字颜色</h3>
+        <p class="example-desc">文字颜色渐变</p>
+        <div class="demo-area">
+          <div class="color-text">HOVER</div>
+        </div>
+        <code>transition: color 0.4s ease;</code>
+      </div>
+
+      <!-- 示例10 -->
+      <div class="example-card">
+        <h3 class="example-title">10. 组合动画</h3>
+        <p class="example-desc">缩放 + 旋转 + 透明度 + 圆角</p>
+        <div class="demo-area">
+          <div class="combo-card">组合</div>
+        </div>
+        <code>transition: transform 0.5s, opacity 0.5s;</code>
+      </div>
+
+      <!-- 示例11 -->
+      <div class="example-card">
+        <h3 class="example-title">11. 速度曲线对比</h3>
+        <p class="example-desc">悬停查看不同 timing-function</p>
+        <div class="demo-area">
+          <div class="timing-demo">
+            <div class="timing-box timing-linear">linear</div>
+            <div class="timing-box timing-ease">ease</div>
+            <div class="timing-box timing-ease-in">ease-in</div>
+            <div class="timing-box timing-ease-out">ease-out</div>
+          </div>
+        </div>
+        <code>timing-function: linear | ease | ease-in | ease-out</code>
+      </div>
+
+      <!-- 示例12 -->
+      <div class="example-card">
+        <h3 class="example-title">12. 延迟效果</h3>
+        <p class="example-desc">依次放大，展示 delay 参数</p>
+        <div class="demo-area">
+          <div class="delay-demo">
+            <div class="delay-box"></div>
+            <div class="delay-box"></div>
+            <div class="delay-box"></div>
+            <div class="delay-box"></div>
+          </div>
+        </div>
+        <code>transition: transform 0.3s ease 0.1s;</code>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

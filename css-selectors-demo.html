@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 选择器示例</title>
+    <style>
+        /* 通配选择器 - 所有元素 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* 元素选择器 */
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #666;
+            margin: 15px 0;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        /* 类选择器 */
+        .highlight {
+            background-color: yellow;
+            padding: 5px;
+        }
+
+        .box {
+            border: 2px solid #333;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        /* ID选择器 */
+        #special {
+            background-color: lightblue;
+            font-weight: bold;
+        }
+
+        /* 属性选择器 */
+        input[type="text"] {
+            border: 2px solid green;
+            padding: 5px;
+        }
+
+        input[type="email"] {
+            border: 2px solid blue;
+            padding: 5px;
+        }
+
+        a[href^="https"] {
+            color: green;
+        }
+
+        a[href$=".pdf"] {
+            color: red;
+        }
+
+        /* 后代选择器 */
+        .container p {
+            color: purple;
+        }
+
+        /* 子选择器 */
+        .parent > span {
+            background-color: lightgreen;
+        }
+
+        /* 相邻兄弟选择器 */
+        h3 + p {
+            font-style: italic;
+            color: coral;
+        }
+
+        /* 通用兄弟选择器 */
+        .trigger ~ p {
+            background-color: lavender;
+        }
+
+        /* 伪类选择器 - 状态 */
+        button:hover {
+            background-color: orange;
+            cursor: pointer;
+        }
+
+        a:visited {
+            color: gray;
+        }
+
+        input:focus {
+            outline: 3px solid gold;
+        }
+
+        /* 伪类选择器 - 结构 */
+        ul.demo li:first-child {
+            font-weight: bold;
+            color: red;
+        }
+
+        ul.demo li:last-child {
+            font-weight: bold;
+            color: blue;
+        }
+
+        ul.demo li:nth-child(2) {
+            background-color: lightyellow;
+        }
+
+        ul.demo li:nth-child(odd) {
+            background-color: #f0f0f0;
+        }
+
+        /* 伪类选择器 - 表单 */
+        input:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        input:checked + label {
+            color: green;
+            font-weight: bold;
+        }
+
+        /* :not() 伪类 */
+        .list-demo li:not(.special-item) {
+            color: gray;
+        }
+
+        /* 伪元素选择器 */
+        .with-before::before {
+            content: "👉 ";
+            color: red;
+        }
+
+        .with-after::after {
+            content: " ✓";
+            color: green;
+        }
+
+        p.first-letter-demo::first-letter {
+            font-size: 2em;
+            color: red;
+            font-weight: bold;
+        }
+
+        p.first-line-demo::first-line {
+            color: blue;
+            font-weight: bold;
+        }
+
+        /* 分组选择器 */
+        h1, h2, h3 {
+            font-family: Georgia, serif;
+        }
+
+        /* 组合使用示例 */
+        .card:hover .card-title {
+            color: red;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS 选择器示例演示</h1>
+
+    <div class="section">
+        <h2>1. 基础选择器</h2>
+
+        <h3>元素选择器 (h1, h2, p)</h3>
+        <p>这是一个段落，使用元素选择器设置样式。</p>
+
+        <h3>类选择器 (.highlight)</h3>
+        <p>这是一个<span class="highlight">高亮文本</span>的例子。</p>
+
+        <h3>ID选择器 (#special)</h3>
+        <p id="special">这个段落有特殊的 ID 样式</p>
+
+        <h3>属性选择器 [type="text"]</h3>
+        <input type="text" placeholder="文本输入框（绿色边框）"><br><br>
+        <input type="email" placeholder="邮箱输入框（蓝色边框）"><br><br>
+        <a href="https://example.com">HTTPS链接（绿色）</a><br>
+        <a href="document.pdf">PDF链接（红色）</a>
+    </div>
+
+    <div class="section">
+        <h2>2. 组合选择器</h2>
+
+        <h3>后代选择器 (.container p)</h3>
+        <div class="container">
+            <p>这个段落在 container 内（紫色）</p>
+            <div>
+                <p>这个段落也在 container 内的嵌套 div 中（紫色）</p>
+            </div>
+        </div>
+
+        <h3>子选择器 (.parent > span)</h3>
+        <div class="parent">
+            <span>直接子元素 span（浅绿背景）</span>
+            <div>
+                <span>嵌套的 span（无样式）</span>
+            </div>
+        </div>
+
+        <h3>相邻兄弟选择器 (h3 + p)</h3>
+        <p>紧跟在 h3 后的第一个 p 元素（斜体，珊瑚色）</p>
+        <p>第二个 p 元素（无特殊样式）</p>
+
+        <h3>通用兄弟选择器 (.trigger ~ p)</h3>
+        <div class="trigger">触发元素</div>
+        <p>第一个兄弟 p（薰衣草背景）</p>
+        <p>第二个兄弟 p（薰衣草背景）</p>
+    </div>
+
+    <div class="section">
+        <h2>3. 伪类选择器</h2>
+
+        <h3>状态伪类 (:hover, :focus)</h3>
+        <button>鼠标悬停我（:hover）</button><br><br>
+        <input type="text" placeholder="点击聚焦我（:focus）">
+
+        <h3>结构伪类 (:first-child, :last-child, :nth-child)</h3>
+        <ul class="demo">
+            <li>第一项（加粗，红色）</li>
+            <li>第二项（浅黄背景）</li>
+            <li>第三项（奇数项，灰色背景）</li>
+            <li>第四项（偶数项）</li>
+            <li>最后一项（加粗，蓝色）</li>
+        </ul>
+
+        <h3>表单伪类 (:disabled, :checked)</h3>
+        <input type="text" placeholder="正常输入框"><br><br>
+        <input type="text" placeholder="禁用输入框" disabled><br><br>
+        <input type="checkbox" id="cb1">
+        <label for="cb1">选中我试试（:checked）</label>
+
+        <h3>:not() 伪类</h3>
+        <ul class="list-demo">
+            <li>普通项（灰色）</li>
+            <li class="special-item">特殊项（正常颜色）</li>
+            <li>普通项（灰色）</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. 伪元素选择器</h2>
+
+        <h3>::before 和 ::after</h3>
+        <p class="with-before">这段文字前面有 before 内容</p>
+        <p class="with-after">这段文字后面有 after 内容</p>
+
+        <h3>::first-letter</h3>
+        <p class="first-letter-demo">这段文字的首字母会被放大并变红。注意首字母的特殊样式效果。</p>
+
+        <h3>::first-line</h3>
+        <p class="first-line-demo">这段文字的第一行会显示为蓝色加粗。当你调整浏览器窗口大小时，第一行的内容可能会改变，但样式会自动应用到新的第一行。</p>
+    </div>
+
+    <div class="section">
+        <h2>5. 组合使用示例</h2>
+
+        <div class="card">
+            <h3 class="card-title">卡片标题</h3>
+            <p>鼠标悬停在这个卡片上，观察标题颜色变化和阴影效果。</p>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">另一个卡片</h3>
+            <p>这展示了如何组合使用多个选择器来创建交互效果。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. 分组选择器</h2>
+        <p>所有的 h1, h2, h3 标题都使用了 Georgia 字体（分组选择器示例）</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图 Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .carousel-container {
+            width: 800px;
+            max-width: 90%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 450px;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 30px;
+        }
+
+        .slide-content h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .slide-content p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* 左右箭头 */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .carousel-btn.prev {
+            left: 20px;
+        }
+
+        .carousel-btn.next {
+            right: 20px;
+        }
+
+        /* 指示器 */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        .indicator:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .carousel-slide {
+                height: 300px;
+            }
+
+            .slide-content h2 {
+                font-size: 20px;
+            }
+
+            .slide-content p {
+                font-size: 14px;
+            }
+
+            .carousel-btn {
+                padding: 10px 15px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel-wrapper">
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=450&fit=crop" alt="山景">
+                <div class="slide-content">
+                    <h2>壮丽山景</h2>
+                    <p>探索大自然的鬼斧神工，感受山川的壮美</p>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=450&fit=crop" alt="海滩">
+                <div class="slide-content">
+                    <h2>海滩度假</h2>
+                    <p>享受阳光、沙滩和海浪，放松身心</p>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=450&fit=crop" alt="城市">
+                <div class="slide-content">
+                    <h2>现代都市</h2>
+                    <p>感受城市的繁华与现代化的魅力</p>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=800&h=450&fit=crop" alt="森林">
+                <div class="slide-content">
+                    <h2>神秘森林</h2>
+                    <p>走进绿色世界，体验大自然的宁静</p>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=800&h=450&fit=crop" alt="湖泊">
+                <div class="slide-content">
+                    <h2>清澈湖泊</h2>
+                    <p>静谧的湖水，倒映着天空与群山</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 左右箭头按钮 -->
+        <button class="carousel-btn prev" onclick="moveSlide(-1)">❮</button>
+        <button class="carousel-btn next" onclick="moveSlide(1)">❯</button>
+
+        <!-- 指示器 -->
+        <div class="carousel-indicators">
+            <span class="indicator active" onclick="goToSlide(0)"></span>
+            <span class="indicator" onclick="goToSlide(1)"></span>
+            <span class="indicator" onclick="goToSlide(2)"></span>
+            <span class="indicator" onclick="goToSlide(3)"></span>
+            <span class="indicator" onclick="goToSlide(4)"></span>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.indicator');
+        const wrapper = document.querySelector('.carousel-wrapper');
+        const totalSlides = slides.length;
+        let autoPlayInterval;
+
+        // 更新轮播图位置
+        function updateCarousel() {
+            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            // 更新指示器
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // 移动幻灯片
+        function moveSlide(direction) {
+            currentSlide += direction;
+
+            // 循环处理
+            if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            } else if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            }
+
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        // 跳转到指定幻灯片
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+            resetAutoPlay();
+        }
+
+        // 自动播放
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                moveSlide(1);
+            }, 3000); // 每3秒切换一次
+        }
+
+        // 重置自动播放
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+
+        // 键盘控制
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                moveSlide(-1);
+            } else if (e.key === 'ArrowRight') {
+                moveSlide(1);
+            }
+        });
+
+        // 触摸滑动支持（移动端）
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        wrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        wrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) {
+                moveSlide(1); // 向左滑动
+            }
+            if (touchEndX > touchStartX + 50) {
+                moveSlide(-1); // 向右滑动
+            }
+        }
+
+        // 页面加载时开始自动播放
+        startAutoPlay();
+
+        // 鼠标悬停时暂停自动播放
+        const container = document.querySelector('.carousel-container');
+        container.addEventListener('mouseenter', () => {
+            clearInterval(autoPlayInterval);
+        });
+
+        container.addEventListener('mouseleave', () => {
+            startAutoPlay();
+        });
+    </script>
+</body>
+</html>
